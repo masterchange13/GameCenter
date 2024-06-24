@@ -15,7 +15,7 @@ spring:
     time-zone: GMT+8  # 时区修改为东8区
   datasource:
     url: jdbc:mysql://localhost:3306/game?alowPublicKeyRetrieval=true&useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=UTC
-    username: user
+    username: root
     password: 123456
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:

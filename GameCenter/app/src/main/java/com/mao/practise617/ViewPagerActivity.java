@@ -160,25 +160,6 @@ public class ViewPagerActivity extends AppCompatActivity implements View.OnClick
     ListView events_new_list;
 
     public void view1init(View view1) {
-        // 以下代码是最初代码，如果之后不能使用，可以恢复，如果修复好了，可以删除
-//        goodsList = view1.findViewById(R.id.goodsList);
-//
-//        List<Map<String, String>> users = new ArrayList<Map<String, String>>();
-//
-//        for (int i = 0; i < 5; ++i) {
-//            Map<String, String> user = new HashMap<String, String>();
-//            user.put("mesgg", "商品" + i);
-//            user.put("tel", "123456789" + i);
-//            users.add(user);
-//        }
-//
-//        SimpleAdapter userAdapter = new SimpleAdapter(ViewPagerActivity.this, users, R.layout.goodslistshow,
-//                new String[]{"mesgg", "tel"},
-//                new int[]{R.id.userName, R.id.tel});
-//
-//        goodsList.setAdapter(userAdapter);
-
-
         ViewPager2 viewPager2 = view1.findViewById(R.id.lun_bo);
 //        TabLayout tabLayout = findViewById(R.id.tabLayout);
 //        ViewPager2  viewPager;
@@ -269,6 +250,7 @@ public class ViewPagerActivity extends AppCompatActivity implements View.OnClick
 
         //判断   点击 id 判断
         if (view.getId() == R.id.weixin1) {
+//            view1init();
             viewPager.setCurrentItem(0);//
         } else if (view.getId() == R.id.tongxunl) {
             viewPager.setCurrentItem(1);//
