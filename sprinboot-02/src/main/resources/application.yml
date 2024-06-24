@@ -1,0 +1,60 @@
+server:
+  port: 8083
+
+
+
+
+#文件上传大小设置
+spring:
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 100MB
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss  #时间戳统一转换为指定格式
+    time-zone: GMT+8  # 时区修改为东8区
+  datasource:
+    url: jdbc:mysql://localhost:3306/game?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=UTC
+    username: user
+    password: 123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    show-sql: true
+    hibernate:
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+  thymeleaf:
+    cache: false # 关闭缓存
+    mode: LEGACYHTML5 # 去除htm5严格校验
+    prefix: classpath:/templates/ # 指定 thymeleaf 模板路径
+    encoding: UTF-8 # 指定字符集编码
+  mvc:
+    static-path-pattern: /static/** # js ,css 等静态文件路径
+  web:
+    resources:
+      static-locations: classpath:/templates/,classpath:/static/
+
+contractPdfFilePath: E://
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
+logging:
+  level:
+    org.mybatis: TRACE
+
+
+
+#redis:
+#  host: 127.0.0.1
+#  port: 6379
+#  # password: huaiyin123
+#  timeout: 2000
+#  # password:
+#  pool:
+#    minIdle: 1
+#    maxIdle: 10
+#    maxWait: 3
+#    maxActive: 8
+
+
+

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".HttpMainActivity">
+
+    <ImageView
+        android:id="@+id/img"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        app:layout_constraintStart_toStartOf="@+id/downloadFile1"
+        app:layout_constraintTop_toBottomOf="@+id/downloadFile1"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <Button
+        android:id="@+id/register"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="register"
+        android:text="register"
+        app:layout_constraintStart_toStartOf="@+id/img"
+        app:layout_constraintTop_toBottomOf="@+id/img" />
+
+    <Button
+        android:id="@+id/downloadFile1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="32dp"
+        android:onClick="down"
+        android:text="downloadFile"
+        app:layout_constraintStart_toStartOf="@+id/p1"
+        app:layout_constraintTop_toBottomOf="@+id/p1" />
+
+    <EditText
+        android:id="@+id/n1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="91dp"
+        android:ems="10"
+        android:hint="用户名"
+        android:inputType="text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/p1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="3dp"
+        android:ems="10"
+        android:hint="mim"
+        android:inputType="text"
+        app:layout_constraintEnd_toEndOf="@+id/n1"
+        app:layout_constraintTop_toBottomOf="@+id/n1" />
+
+    <Button
+        android:id="@+id/button37"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="toGetGoodsArray"
+        android:text="Button"
+        tools:layout_editor_absoluteX="120dp"
+        tools:layout_editor_absoluteY="450dp" />
+</androidx.constraintlayout.widget.ConstraintLayout>

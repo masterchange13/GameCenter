@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#EAD9D9"
+        android:gravity="center"
+        android:textSize="30dp"></TextView>
+
+    <!-- scaleType 图片设置   -->
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="117dp"
+        android:scaleType="fitXY"
+        />
+
+    <EditText
+        android:id="@+id/edPersonName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+
+        android:inputType="textPersonName"
+        />
+
+    <EditText
+        android:id="@+id/edPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:inputType="textPassword"
+        />
+
+    <CheckBox
+        android:id="@+id/chlogin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="阅读条款" />
+
+    <Button
+        android:id="@+id/button02"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Button"
+
+        app:backgroundTint="#2D8E9A"
+        />
+
+
+</LinearLayout>

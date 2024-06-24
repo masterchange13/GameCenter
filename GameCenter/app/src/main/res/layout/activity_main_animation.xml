@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    tools:context=".MainActivityAnimation">
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/ScaleBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="toScale"
+            android:text="Scale" />
+
+        <Button
+            android:id="@+id/AlphaBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="toAlpha"
+            android:text="Alpha" />
+
+        <Button
+            android:id="@+id/TranslateBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="toTransl"
+            android:text="Translate" />
+
+        <Button
+            android:id="@+id/RotateBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="toRotate"
+            android:text="Rotate" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/Imageview01"
+        android:layout_width="324dp"
+        android:layout_height="494dp"
+        android:layout_gravity="center"
+        android:src="@drawable/xz" />
+
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="跳过"
+        android:onClick="toWeChat"/>
+</LinearLayout>

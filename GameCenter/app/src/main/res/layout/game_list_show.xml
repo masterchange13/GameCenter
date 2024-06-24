@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/gameTitle"
+        android:layout_width="274dp"
+        android:layout_height="30dp"
+        android:text="Game Title"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/gameContent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/gameContent"
+        android:layout_width="210dp"
+        android:layout_height="51dp"
+        android:text="Game Content xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxdsadsadsadasdsadsadsadas"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/imageView7"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/gameTitle" />
+
+    <ImageView
+        android:id="@+id/imageView7"
+        android:layout_width="124dp"
+        android:layout_height="73dp"
+        android:layout_marginStart="8dp"
+        android:contentDescription="@string/app_name"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_default="wrap"
+        app:layout_constraintStart_toEndOf="@id/gameContent"
+        app:layout_constraintTop_toBottomOf="@id/gameTitle"
+        app:layout_constraintVertical_bias="1.0"
+        app:layout_constraintWidth_default="wrap"
+        app:srcCompat="@drawable/ash" />
+</androidx.constraintlayout.widget.ConstraintLayout>

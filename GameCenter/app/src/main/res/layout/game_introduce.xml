@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/game_guide_content_text"
+        android:layout_width="0dp"
+        android:layout_height="150dp"
+        android:layout_marginStart="70dp"
+        android:layout_marginTop="55dp"
+        android:layout_marginEnd="70dp"
+        android:layout_marginBottom="54dp"
+        android:text="游戏简介"
+        app:layout_constraintBottom_toTopOf="@+id/textView8"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView4" />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="183dp"
+        android:layout_height="130dp"
+        android:layout_marginTop="53dp"
+        android:layout_marginEnd="14dp"
+        app:layout_constraintEnd_toStartOf="@+id/button3"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/pei_qi" />
+
+    <TextView
+        android:id="@+id/game_guide_content_title"
+        android:layout_width="0dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="37dp"
+        android:layout_marginTop="61dp"
+        android:layout_marginEnd="43dp"
+        android:layout_marginBottom="67dp"
+        android:text="游戏名称"
+        app:layout_constraintBottom_toBottomOf="@+id/button3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/button3"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="13dp"
+        android:text="想玩"
+        app:layout_constraintBaseline_toBaselineOf="@+id/button4"
+        app:layout_constraintEnd_toStartOf="@+id/button4" />
+
+    <Button
+        android:id="@+id/button4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="129dp"
+        android:layout_marginEnd="27dp"
+        android:text="玩过"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="0dp"
+        android:layout_height="79dp"
+        android:layout_marginTop="35dp"
+        android:layout_marginBottom="33dp"
+        app:layout_constraintBottom_toTopOf="@+id/imageView6"
+        app:layout_constraintEnd_toEndOf="@+id/imageView6"
+        app:layout_constraintStart_toStartOf="@+id/imageView6"
+        app:layout_constraintTop_toBottomOf="@+id/game_guide_content_text"
+        app:srcCompat="@drawable/pei_qi" />
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="0dp"
+        android:layout_height="71dp"
+        android:layout_marginBottom="220dp"
+        android:text="玩家评论"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/game_guide_content_text"
+        app:layout_constraintStart_toStartOf="@+id/textView10" />
+
+    <ImageView
+        android:id="@+id/imageView6"
+        android:layout_width="76dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="53dp"
+        android:layout_marginTop="22dp"
+        android:layout_marginBottom="5dp"
+        app:layout_constraintBottom_toBottomOf="@+id/textView10"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView8"
+        app:srcCompat="@drawable/pei_qi" />
+
+    <TextView
+        android:id="@+id/textView10"
+        android:layout_width="0dp"
+        android:layout_height="73dp"
+        android:layout_marginStart="27dp"
+        android:layout_marginTop="108dp"
+        android:layout_marginEnd="27dp"
+        android:layout_marginBottom="110dp"
+        android:text="玩家评论"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/game_guide_content_title"
+        app:layout_constraintStart_toEndOf="@+id/imageView6"
+        app:layout_constraintTop_toTopOf="@+id/textView8" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
