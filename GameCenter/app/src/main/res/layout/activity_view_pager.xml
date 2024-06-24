@@ -26,7 +26,8 @@
             android:gravity="center"
             android:text="最新赛事"
             android:textColor="#000000"
-            android:textSize="20dip" />
+            android:textSize="20dip"/>
+<!--            android:drawableLeft="@drawable/pei_qi"-->
 
         <TextView
             android:id="@+id/tongxunl"

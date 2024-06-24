@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.drawable.Drawable;
 import android.hardware.camera2.params.LensShadingMap;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -73,6 +74,10 @@ public class ViewPagerActivity extends AppCompatActivity implements View.OnClick
 
         // 菜单  点击事件
         weixin1 = (TextView) findViewById(R.id.weixin1);
+        Drawable drawable = getResources().getDrawable(R.drawable.hand);
+        drawable.setBounds(0, 0, 48, 48); // 设置图标的宽度和高度
+        weixin1.setCompoundDrawables(null, drawable, null, null);
+
         wo = (TextView) findViewById(R.id.wo);
         fax = (TextView) findViewById(R.id.fax);
         tongxunl = (TextView) findViewById(R.id.tongxunl);
