@@ -63,6 +63,16 @@ CREATE TABLE recommended_games_stars (
                                          FOREIGN KEY (star_id) REFERENCES game_stars(star_id)
 );
 
+-- 创建评论表
+CREATE TABLE guide_comments (
+                                comment_id INT PRIMARY KEY AUTO_INCREMENT,
+                                guide_id INT,
+                                commenter_name VARCHAR(100),
+                                comment_content TEXT,
+                                FOREIGN KEY (guide_id) REFERENCES game_guides(guide_id)
+);
+
+
 -- 创建索引优化查询
 CREATE INDEX idx_game_guides_game_name ON game_guides(game_name);
 

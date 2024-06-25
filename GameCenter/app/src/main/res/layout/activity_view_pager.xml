@@ -1,63 +1,90 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     tools:context=".ViewPagerActivity">
-
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/viewPager"
         android:layout_width="match_parent"
-        android:layout_height="600dp"></androidx.viewpager.widget.ViewPager>
+        android:layout_height="match_parent"
+        android:layout_above="@id/linearLayout"></androidx.viewpager.widget.ViewPager>
 
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="50.0dip"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
         android:background="#FFFFFF">
 
-        <!--layout_weight这个属性为权重，让两个textview平分这个linearLayout-->
-        <TextView
-            android:id="@+id/weixin1"
-            android:layout_width="match_parent"
+        <LinearLayout
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1.0"
-            android:gravity="center"
-            android:text="最新赛事"
-            android:textColor="#000000"
-            android:textSize="20dip"/>
-<!--            android:drawableLeft="@drawable/pei_qi"-->
+            android:orientation="vertical"
+            android:gravity="center">
 
-        <TextView
-            android:id="@+id/tongxunl"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1.0"
-            android:gravity="center"
-            android:text="游戏推荐"
-            android:textColor="#000000"
-            android:textSize="20dip" />
+            <TextView
+                android:id="@+id/weixin1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="游戏推荐"
+                android:textColor="#000000"
+                android:textSize="20dip"/>
+        </LinearLayout>
 
-        <TextView
-            android:id="@+id/fax"
-            android:layout_width="match_parent"
+        <LinearLayout
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1.0"
-            android:gravity="center"
-            android:text="游戏明星"
-            android:textColor="#000000"
-            android:textSize="20dip" />
+            android:orientation="vertical"
+            android:gravity="center">
 
-        <TextView
-            android:id="@+id/wo"
-            android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/tongxunl"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="最新赛事"
+                android:textColor="#000000"
+                android:textSize="20dip"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1.0"
-            android:gravity="center"
-            android:text="游戏攻略"
-            android:textColor="#000000"
-            android:textSize="20dip" />
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/fax"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="游戏明星"
+                android:textColor="#000000"
+                android:textSize="20dip"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.0"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/wo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="游戏攻略"
+                android:textColor="#000000"
+                android:textSize="20dip"/>
+        </LinearLayout>
 
     </LinearLayout>
-</LinearLayout>
+</RelativeLayout>

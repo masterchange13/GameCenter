@@ -2,10 +2,7 @@ package com.mao.practise617;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.graphics.drawable.Drawable;
-import android.hardware.camera2.params.LensShadingMap;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,7 +10,6 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
-import android.widget.TableLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,19 +18,16 @@ import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 import androidx.viewpager2.widget.ViewPager2;
 
-import com.google.android.material.tabs.TabLayout;
-import com.google.android.material.tabs.TabLayoutMediator;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.mao.practise617.Adapter.ImageSliderAdapter;
-import com.mao.practise617.GameGuide.GameGuide;
 import com.mao.practise617.GameGuide.GameGuideContentActivity;
+import com.mao.practise617.GameRecommend.GameRecommendActivity;
 import com.mao.practise617.GameStar.StarIntroduceActivity;
 import com.mao.practise617.Network.Network;
 import com.mao.practise617.Network.ResponseCallback;
 
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
@@ -62,6 +55,9 @@ public class ViewPagerActivity extends AppCompatActivity implements View.OnClick
     private ListView stulist;
     private Button button5;
 
+    private ListView recommendGameList;
+    private
+
     Network network = new Network();
 
 
@@ -74,13 +70,24 @@ public class ViewPagerActivity extends AppCompatActivity implements View.OnClick
 
         // 菜单  点击事件
         weixin1 = (TextView) findViewById(R.id.weixin1);
-        Drawable drawable = getResources().getDrawable(R.drawable.hand);
-        drawable.setBounds(0, 0, 48, 48); // 设置图标的宽度和高度
+        Drawable drawable = getResources().getDrawable(R.drawable.cup);
+        drawable.setBounds(0, 0, 188, 188); // 设置图标的宽度和高度
         weixin1.setCompoundDrawables(null, drawable, null, null);
 
         wo = (TextView) findViewById(R.id.wo);
+        Drawable drawable2 = getResources().getDrawable(R.drawable.hand);
+        drawable2.setBounds(0, 0, 188, 188); // 设置图标的宽度和高度
+        wo.setCompoundDrawables(null, drawable2, null, null);
+
         fax = (TextView) findViewById(R.id.fax);
+        Drawable drawable3 = getResources().getDrawable(R.drawable.star);
+        drawable3.setBounds(0, 0, 188, 188); // 设置图标的宽度和高度
+        fax.setCompoundDrawables(null, drawable3, null, null);
+
         tongxunl = (TextView) findViewById(R.id.tongxunl);
+        Drawable drawable4 = getResources().getDrawable(R.drawable.book);
+        drawable4.setBounds(0, 0, 188, 188); // 设置图标的宽度和高度
+        tongxunl.setCompoundDrawables(null, drawable4, null, null);
 
         Toast.makeText(this, "hello world", Toast.LENGTH_SHORT).show();
 
@@ -178,6 +185,26 @@ public class ViewPagerActivity extends AppCompatActivity implements View.OnClick
 //        new TabLayoutMediator(tabLayout, viewPager2, (tab, position) -> {
 //            // 设置 tab 的文本或图标，可以根据需要自定义
 //        }).attach();
+
+        recommendGameList = view1.findViewById(R.id.game_recommend_list);
+
+        List<Map<String, String>> events = new ArrayList<Map<String, String>>();
+
+//        for (int i = 0; i < 5; ++i) {
+//            Map<String, String> event = new HashMap<String, String>();
+//            event.put("gameTitle", "R6" + i);
+//            event.put("gameContent", "i like it" + i);
+//            events.add(event);
+//        }
+
+//        SimpleAdapter eventsAdapter = new SimpleAdapter(ViewPagerActivity.this, events, R.layout.game_list_show,
+//                new String[]{"gameTitle", "gameContent"},
+//                new int[]{R.id.gameTitle, R.id.gameContent});
+//
+//        recommendGameList.setAdapter(eventsAdapter);
+
+        String  url = ipAddr.getIpGameRecommend() + "/findAll";
+        view1Data(url);
     }
 
 
@@ -217,32 +244,6 @@ public class ViewPagerActivity extends AppCompatActivity implements View.OnClick
         String url = ipAddr.getIpGameStar() + "/findAll";
         view3Data(url);
 
-//        for (int i = 0; i < 5; ++i) {
-//            Map<String, String> user = new HashMap<String, String>();
-//            user.put("name", "玩家" + i);
-//            user.put("content", "he is special at rainbow six " + i);
-//            gameStar.add(user);
-//        }
-
-//        SimpleAdapter gameStarAdapter = new SimpleAdapter(ViewPagerActivity.this, gameStar, R.layout.gamestar,
-//                new String[]{"name", "content"},
-//                new int[]{R.id.gameStarName, R.id.gameStarContent});
-//
-//        gameStarList.setAdapter(gameStarAdapter);
-//
-//
-//        // Set OnItemClickListener to handle click events
-//        gameStarList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                // 获取你的数据源中的数据项
-////                Map<String, String> item = (Map<String, String>) parent.getItemAtPosition(position);
-//
-//                // 假设你的数据项有一个名为 "id" 的键，用于标识唯一标识符
-////                String itemId = item.get("id");
-//                toNewActivity(parent, view, position, id, StarIntroduceActivity.class);
-//            }
-//        });
     }
 
     @Override
@@ -339,6 +340,55 @@ public class ViewPagerActivity extends AppCompatActivity implements View.OnClick
         view.getContext().startActivity(intent);
     }
 
+    public void view1Data(String url) {
+        network.sendGetRequestWithThread(url, new ResponseCallback() {
+            @Override
+            public void onSuccess(String response) {
+                // 在这里处理成功响应
+                System.out.println("响应成功: " + response);
+
+                // 解析 JSON 对象
+                List<Map<String, String>> users = handleData(response);
+                System.out.println("users======" + users);
+
+                // 确保视图更新在主线程中进行
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        SimpleAdapter eventsAdapter = new SimpleAdapter(ViewPagerActivity.this, users, R.layout.game_list_show,
+                                new String[]{"gameId", "gameName", "gameDescription"},
+                                new int[]{R.id.gameTitle, R.id.gameContent});
+
+                        recommendGameList.setAdapter(eventsAdapter);
+
+                        recommendGameList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                                Map<String, String> user = users.get(position);
+                                // 获取到游戏的id
+                                int idd = Integer.parseInt(user.get("gameId"));
+                                toNewActivity(parent, view, position, idd, GameRecommendActivity.class);
+                            }
+                        });
+                    }
+                });
+            }
+
+            @Override
+            public void onFailure(Exception e) {
+                // 在这里处理失败情况
+                System.out.println("请求失败: " + e.getMessage());
+                // 使用 runOnUiThread 确保 Toast 显示在主线程中
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(ViewPagerActivity.this, "请求失败，找不到数据", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+        });
+    }
+
     public void view4Data(String url) {
         network.sendGetRequestWithThread(url, new ResponseCallback() {
             @Override
@@ -346,23 +396,28 @@ public class ViewPagerActivity extends AppCompatActivity implements View.OnClick
                 // 在这里处理成功响应
                 System.out.println("响应成功: " + response);
 
-//                // 在这里处理解析后的 JSON 对象
-                List<Map<String, String>> users = handleData(response);
+                // 处理解析后的 JSON 对象
+                final List<Map<String, String>> users = handleData(response);
                 System.out.println("users======" + users);
 
-
-                SimpleAdapter gameAdapter = new SimpleAdapter(ViewPagerActivity.this, users, R.layout.game_list_show,
-                        new String[]{"guideId", "gameName", "guideContent"},
-                        new int[]{R.id.gameTitle, R.id.gameContent});
-
-                gameGuideList.setAdapter(gameAdapter);
-
-                gameGuideList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                // 确保UI操作在主线程上执行
+                runOnUiThread(new Runnable() {
                     @Override
-                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        Map<String, String> user = users.get(position);
-                        int idd = Integer.parseInt(user.get("guideId"));
-                        toNewActivity(parent, view, position, idd, GameGuideContentActivity.class);
+                    public void run() {
+                        SimpleAdapter gameAdapter = new SimpleAdapter(ViewPagerActivity.this, users, R.layout.game_list_show,
+                                new String[]{"guideId", "gameName", "guideContent"},
+                                new int[]{R.id.gameTitle, R.id.gameContent});
+
+                        gameGuideList.setAdapter(gameAdapter);
+
+                        gameGuideList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                                Map<String, String> user = users.get(position);
+                                int idd = Integer.parseInt(user.get("guideId"));
+                                toNewActivity(parent, view, position, idd, GameGuideContentActivity.class);
+                            }
+                        });
                     }
                 });
             }
@@ -382,23 +437,28 @@ public class ViewPagerActivity extends AppCompatActivity implements View.OnClick
                 // 在这里处理成功响应
                 System.out.println("响应成功: " + response);
 
-//                // 在这里处理解析后的 JSON 对象
+                // 解析数据
                 List<Map<String, String>> users = handleData(response);
                 System.out.println("users======" + users);
 
-
-                SimpleAdapter gameAdapter = new SimpleAdapter(ViewPagerActivity.this, users, R.layout.gamestar,
-                        new String[]{"starId", "starName", "starDescription"},
-                        new int[]{R.id.gameStarName, R.id.gameStarContent});
-
-                gameStarList.setAdapter(gameAdapter);
-
-                gameStarList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                // 确保视图更新在主线程中进行
+                runOnUiThread(new Runnable() {
                     @Override
-                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        Map<String, String> user = users.get(position);
-                        int idd = Integer.parseInt(user.get("starId"));
-                        toNewActivity(parent, view, position, idd, StarIntroduceActivity.class);
+                    public void run() {
+                        SimpleAdapter gameAdapter = new SimpleAdapter(ViewPagerActivity.this, users, R.layout.gamestar,
+                                new String[]{"starId", "starName", "starDescription"},
+                                new int[]{R.id.gameStarName, R.id.gameStarContent});
+
+                        gameStarList.setAdapter(gameAdapter);
+
+                        gameStarList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                                Map<String, String> user = users.get(position);
+                                int idd = Integer.parseInt(user.get("starId"));
+                                toNewActivity(parent, view, position, idd, StarIntroduceActivity.class);
+                            }
+                        });
                     }
                 });
             }
@@ -407,9 +467,17 @@ public class ViewPagerActivity extends AppCompatActivity implements View.OnClick
             public void onFailure(Exception e) {
                 // 在这里处理失败情况
                 System.out.println("请求失败: " + e.getMessage());
+                // 使用 runOnUiThread 确保 Toast 显示在主线程中
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(ViewPagerActivity.this, "请求失败，找不到数据", Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
         });
     }
+
 
     public List<Map<String, String>> handleData(String data) {
         // 使用 Gson 将响应字符串转换为 JSON 对象

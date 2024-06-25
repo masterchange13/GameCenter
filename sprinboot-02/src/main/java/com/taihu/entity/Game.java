@@ -16,9 +16,9 @@ import java.sql.Date;
 public class Game {
     @Id
     private int gameId;
-    private String name;
+    private String gameName;
     private String gameType;
-    private Date releaseDate;
+    private String releaseDate;
     private String developer;
     private BigDecimal price;
     private String description;
