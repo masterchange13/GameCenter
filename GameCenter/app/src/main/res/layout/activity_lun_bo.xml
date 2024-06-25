@@ -4,26 +4,27 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <!-- FrameLayout containing ViewPager2 -->
+    <FrameLayout
+        android:id="@+id/frame_layout"
+        android:layout_width="match_parent"
+        android:layout_height="225dp"
+        android:layout_margin="15dp"
+        android:orientation="vertical">
+
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/lun_bo"
         android:layout_width="match_parent"
         android:layout_height="200dp" />
+</FrameLayout>
 
-<!--    <com.google.android.material.tabs.TabLayout-->
-<!--        android:id="@+id/tabLayout"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_below="@id/lun_bo"-->
-<!--        app:tabIndicatorColor="@android:color/white"-->
-<!--        app:tabSelectedTextColor="@android:color/white"-->
-<!--        app:tabTextColor="@android:color/darker_gray" />-->
-
-    <ListView
-        android:id="@+id/game_recommend_list"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/lun_bo"
-        android:layout_alignParentBottom="true"
-        android:layout_marginTop="0dp" />
-
-</RelativeLayout>
+    <!-- ListView positioned below FrameLayout -->
+<ListView
+android:id="@+id/game_recommend_list"
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:layout_below="@id/frame_layout"
+    android:layout_marginLeft="15dp"
+    android:layout_marginRight="15dp"
+    android:layout_marginBottom="15dp" />
+    </RelativeLayout>

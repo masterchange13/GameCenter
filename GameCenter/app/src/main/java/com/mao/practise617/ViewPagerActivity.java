@@ -70,24 +70,24 @@ public class ViewPagerActivity extends AppCompatActivity implements View.OnClick
 
         // 菜单  点击事件
         weixin1 = (TextView) findViewById(R.id.weixin1);
-        Drawable drawable = getResources().getDrawable(R.drawable.cup);
-        drawable.setBounds(0, 0, 188, 188); // 设置图标的宽度和高度
-        weixin1.setCompoundDrawables(null, drawable, null, null);
+//        Drawable drawable = getResources().getDrawable(R.drawable.cup);
+//        drawable.setBounds(0, 0, 188, 188); // 设置图标的宽度和高度
+//        weixin1.setCompoundDrawables(null, drawable, null, null);
 
         wo = (TextView) findViewById(R.id.wo);
-        Drawable drawable2 = getResources().getDrawable(R.drawable.hand);
-        drawable2.setBounds(0, 0, 188, 188); // 设置图标的宽度和高度
-        wo.setCompoundDrawables(null, drawable2, null, null);
+//        Drawable drawable2 = getResources().getDrawable(R.drawable.hand);
+//        drawable2.setBounds(0, 0, 188, 188); // 设置图标的宽度和高度
+//        wo.setCompoundDrawables(null, drawable2, null, null);
 
         fax = (TextView) findViewById(R.id.fax);
-        Drawable drawable3 = getResources().getDrawable(R.drawable.star);
-        drawable3.setBounds(0, 0, 188, 188); // 设置图标的宽度和高度
-        fax.setCompoundDrawables(null, drawable3, null, null);
+//        Drawable drawable3 = getResources().getDrawable(R.drawable.star);
+//        drawable3.setBounds(0, 0, 188, 188); // 设置图标的宽度和高度
+//        fax.setCompoundDrawables(null, drawable3, null, null);
 
         tongxunl = (TextView) findViewById(R.id.tongxunl);
-        Drawable drawable4 = getResources().getDrawable(R.drawable.book);
-        drawable4.setBounds(0, 0, 188, 188); // 设置图标的宽度和高度
-        tongxunl.setCompoundDrawables(null, drawable4, null, null);
+//        Drawable drawable4 = getResources().getDrawable(R.drawable.book);
+//        drawable4.setBounds(0, 0, 188, 188); // 设置图标的宽度和高度
+//        tongxunl.setCompoundDrawables(null, drawable4, null, null);
 
         Toast.makeText(this, "hello world", Toast.LENGTH_SHORT).show();
 
