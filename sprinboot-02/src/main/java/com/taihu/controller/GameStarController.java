@@ -30,4 +30,9 @@ public class GameStarController {
     public void save(@RequestBody GameStar gameStar){
         gameStarJpa.save(gameStar);
     }
+
+    @GetMapping("/delete/{id}")
+    public void deleteById(@PathVariable("id") Integer id){
+        gameStarJpa.deleteById(id);
+    }
 }

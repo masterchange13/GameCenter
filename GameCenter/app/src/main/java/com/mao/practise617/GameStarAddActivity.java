@@ -40,7 +40,7 @@ public class GameStarAddActivity extends AppCompatActivity {
         cancelButton = findViewById(R.id.game_star_cancel_button);
         confirmButton = findViewById(R.id.game_star_confirm_button);
 
-       initConfirmButton();
+        initConfirmButton();
         initCancelButton();
     }
 

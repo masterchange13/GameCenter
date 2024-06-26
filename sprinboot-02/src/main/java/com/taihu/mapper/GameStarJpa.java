@@ -1,6 +1,7 @@
 package com.taihu.mapper;
 
 import com.taihu.entity.GameStar;
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
@@ -20,4 +21,7 @@ public interface GameStarJpa{
 
     @Insert("INSERT INTO game_stars (star_name, star_description) VALUES (#{starName}, #{starDescription})")
     void save(GameStar gameStar);
+
+    @Delete("delete from game_stars where star_id = #{id}")
+    void deleteById(Integer id);
 }

@@ -516,18 +516,55 @@ public class ViewPagerActivity extends AppCompatActivity implements View.OnClick
     }
 
     private void showDeleteConfirmationDialog(int position, List<Map<String, String>> users, SimpleAdapter adapter) {
+        final String[] id = {"-1"};
         new AlertDialog.Builder(this)
                 .setTitle("Delete Item")
                 .setMessage("Are you sure you want to delete this item?")
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
+                        Map<String, String> user = users.get(position);
+                        id[0] = user.get("starId");
                         users.remove(position);
                         adapter.notifyDataSetChanged();
                         Toast.makeText(ViewPagerActivity.this, "Item deleted", Toast.LENGTH_SHORT).show();
+
+                        String url = ipAddr.getIpGameStar() + "/delete/" + id[0];
+                        network.sendGetRequestWithThread(url, new ResponseCallback() {
+                            @Override
+                            public void onSuccess(String response) {
+                                // 在这里处理成功响应
+                                System.out.println("响应成功: " + response);
+
+
+                            }
+
+                            @Override
+                            public void onFailure(Exception e) {
+                                // 在这里处理失败情况
+                                System.out.println("请求失败: " + e.getMessage());
+                            }
+                        });
                     }
                 })
                 .setNegativeButton(android.R.string.no, null)
                 .show();
+
+//        String url = ipAddr.getIpGameStar() + "/delete/" + id[0];
+//        network.sendGetRequestWithThread(url, new ResponseCallback() {
+//            @Override
+//            public void onSuccess(String response) {
+//                // 在这里处理成功响应
+//                System.out.println("响应成功: " + response);
+//
+//
+//            }
+//
+//            @Override
+//            public void onFailure(Exception e) {
+//                // 在这里处理失败情况
+//                System.out.println("请求失败: " + e.getMessage());
+//            }
+//        });
     }
 
     public void imageViewInit(View view, Class<?> targetActivityClass) {
@@ -540,6 +577,13 @@ public class ViewPagerActivity extends AppCompatActivity implements View.OnClick
                 Toast.makeText(view.getContext(), "ImageView clicked!", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        // 调用刷新方法，比如重新获取数据并更新视图
+        refreshGameStarList();
     }
 
     @Override
@@ -566,15 +610,23 @@ public class ViewPagerActivity extends AppCompatActivity implements View.OnClick
                 List<Map<String, String>> users = handleData(response);
                 System.out.println("users======" + users);
 
-                // 更新适配器的数据源
-                gameAdapter.clear();  // 清除旧数据
-                gameAdapter.addAll(users);  // 添加新数据
-
-                // 通知适配器数据已更新
+                // 确保视图更新在主线程中进行
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        gameAdapter.notifyDataSetChanged();  // 刷新列表视图
+                        // 创建一个新的 SimpleAdapter，并设置给 gameStarList
+                        SimpleAdapter newAdapter = new SimpleAdapter(
+                                ViewPagerActivity.this,
+                                users,
+                                R.layout.gamestar,
+                                new String[]{"starId", "starName", "starDescription"},
+                                new int[]{R.id.gameStarName, R.id.gameStarContent}
+                        );
+
+                        gameStarList.setAdapter(newAdapter);
+
+                        // Optional: 如果你还想保留对新适配器的引用，可以将其赋给全局变量
+                        // gameAdapter = newAdapter;
                     }
                 });
             }
@@ -593,5 +645,4 @@ public class ViewPagerActivity extends AppCompatActivity implements View.OnClick
             }
         });
     }
-
 }
