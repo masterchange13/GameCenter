@@ -76,3 +76,15 @@ CREATE TABLE guide_comments (
 -- 创建索引优化查询
 CREATE INDEX idx_game_guides_game_name ON game_guides(game_name);
 
+
+SHOW CREATE TABLE recommended_games_stars;
+-- Step 1: Drop foreign key constraint
+ALTER TABLE recommended_games_stars DROP FOREIGN KEY recommended_games_stars_ibfk_2;
+
+-- Step 2: Modify column to auto increment
+ALTER TABLE game_stars MODIFY star_id INT NOT NULL AUTO_INCREMENT;
+
+-- Step 3: Add foreign key constraint back
+ALTER TABLE recommended_games_stars
+    ADD CONSTRAINT recommended_games_stars_ibfk_2
+        FOREIGN KEY (star_id) REFERENCES game_stars(star_id);

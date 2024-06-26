@@ -1,6 +1,10 @@
 package com.mao.practise617;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -8,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
@@ -46,6 +51,7 @@ import java.util.Map;
 public class ViewPagerActivity extends AppCompatActivity implements View.OnClickListener {
 
 
+    private static final int REQUEST_CODE_ADD_GAME_STAR = 1;
     private IpAddr ipAddr = new IpAddr();
 
     private ViewPager viewPager;//  轮播图
@@ -56,9 +62,13 @@ public class ViewPagerActivity extends AppCompatActivity implements View.OnClick
     private Button button5;
 
     private ListView recommendGameList;
-    private
+    private ImageView gameStarView;
+
+    GameStarAddActivity gameStarAddActivity;
 
     Network network = new Network();
+
+    private SimpleAdapter gameAdapter;
 
 
     @SuppressLint("InflateParams")
@@ -244,6 +254,8 @@ public class ViewPagerActivity extends AppCompatActivity implements View.OnClick
         String url = ipAddr.getIpGameStar() + "/findAll";
         view3Data(url);
 
+        gameStarView = view3.findViewById(R.id.game_star_add);
+        imageViewInit(gameStarView, GameStarAddActivity.class);
     }
 
     @Override
@@ -404,7 +416,7 @@ public class ViewPagerActivity extends AppCompatActivity implements View.OnClick
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        SimpleAdapter gameAdapter = new SimpleAdapter(ViewPagerActivity.this, users, R.layout.game_list_show,
+                        gameAdapter = new SimpleAdapter(ViewPagerActivity.this, users, R.layout.game_list_show,
                                 new String[]{"guideId", "gameName", "guideContent"},
                                 new int[]{R.id.gameTitle, R.id.gameContent});
 
@@ -459,6 +471,14 @@ public class ViewPagerActivity extends AppCompatActivity implements View.OnClick
                                 toNewActivity(parent, view, position, idd, StarIntroduceActivity.class);
                             }
                         });
+
+                        gameStarList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+                            @Override
+                            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                                showDeleteConfirmationDialog(position, users, gameAdapter);
+                                return true;
+                            }
+                        });
                     }
                 });
             }
@@ -490,15 +510,88 @@ public class ViewPagerActivity extends AppCompatActivity implements View.OnClick
         // 解析 JSON 数据
         List<Map<String, String>> res = gson.fromJson(data, type);
 
-//        for (int i = 0; i < 5; ++i) {
-//            Map<String, String> user = new HashMap<String, String>();
-//            user.put("id", String.valueOf(i));
-//            user.put("title", "彩虹六号" + i);
-//            user.put("content", "i love rainbow six " + i);
-//            users.add(user);
-//        }
         System.out.println("res------------------------" + res);
 
         return res;
     }
+
+    private void showDeleteConfirmationDialog(int position, List<Map<String, String>> users, SimpleAdapter adapter) {
+        new AlertDialog.Builder(this)
+                .setTitle("Delete Item")
+                .setMessage("Are you sure you want to delete this item?")
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        users.remove(position);
+                        adapter.notifyDataSetChanged();
+                        Toast.makeText(ViewPagerActivity.this, "Item deleted", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .setNegativeButton(android.R.string.no, null)
+                .show();
+    }
+
+    public void imageViewInit(View view, Class<?> targetActivityClass) {
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // 在这里处理点击事件
+                Intent intent = new Intent(view.getContext(), targetActivityClass);
+                view.getContext().startActivity(intent);
+                Toast.makeText(view.getContext(), "ImageView clicked!", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_CODE_ADD_GAME_STAR && resultCode == RESULT_OK) {
+            boolean refreshNeeded = data.getBooleanExtra("refreshNeeded", false);
+            if (refreshNeeded) {
+                // 调用刷新方法，比如重新获取数据并更新视图
+                refreshGameStarList();
+            }
+        }
+    }
+
+    private void refreshGameStarList() {
+        String url = ipAddr.getIpGameStar() + "/findAll";
+        network.sendGetRequestWithThread(url, new ResponseCallback() {
+            @Override
+            public void onSuccess(String response) {
+                // 在这里处理成功响应
+                System.out.println("响应成功: " + response);
+
+                // 解析数据
+                List<Map<String, String>> users = handleData(response);
+                System.out.println("users======" + users);
+
+                // 更新适配器的数据源
+                gameAdapter.clear();  // 清除旧数据
+                gameAdapter.addAll(users);  // 添加新数据
+
+                // 通知适配器数据已更新
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        gameAdapter.notifyDataSetChanged();  // 刷新列表视图
+                    }
+                });
+            }
+
+            @Override
+            public void onFailure(Exception e) {
+                // 在这里处理失败情况
+                System.out.println("请求失败: " + e.getMessage());
+                // 使用 runOnUiThread 确保 Toast 显示在主线程中
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(ViewPagerActivity.this, "请求失败，找不到数据", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+        });
+    }
+
 }
